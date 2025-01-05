@@ -3,13 +3,13 @@ namespace ShootEmUp
     using System;
     using UnityEngine;
 
-    public class EnemyFacad : MonoBehaviour
+    public class EnemyFacade : MonoBehaviour
     {
         [SerializeField] private EnemyAttackAgent enemyAttack; 
         [SerializeField] private EnemyMoveAgent enemyMove;
         [SerializeField] private HitPointsComponent hitPointsComponent;
 
-       
+        private Action<EnemyFacade> disableAction;
         public void SetTarget(GameObject target) 
         {
             enemyAttack.SetTarget(target);
@@ -23,10 +23,20 @@ namespace ShootEmUp
         {
             enemyAttack.WeaponComponent.SetBulletSystem(bulletSystem);  
         }
-        public void AddActionHpEmpty(Action<GameObject> action) 
+        public void Disable() 
         {
-            hitPointsComponent.hpEmpty += action;
+            disableAction?.Invoke(this);
+
         }
-       
+        public void AddActionHpEmpty(Action<EnemyFacade> action) 
+        {
+            disableAction = action;
+            hitPointsComponent.hpEmpty += (gameObject) => Disable();
+        }
+        public void RemoveActionHpEmpty() 
+        {
+            hitPointsComponent.hpEmpty -= (gameObject) => Disable();
+            disableAction = delegate { };
+        }
     }
 }

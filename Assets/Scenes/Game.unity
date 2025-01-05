@@ -214,7 +214,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1831741369}
+  - {fileID: 1748380341}
   m_Father: {fileID: 3951702117947426122}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -231,9 +231,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialCount: 50
-  container: {fileID: 1831741369}
-  prefab: {fileID: 201757604187811891, guid: 5fe72886874b4e445b06cf777ca4920d, type: 3}
+  poolParent: {fileID: 1748380341}
   worldTransform: {fileID: 1683128698}
+  prefab: {fileID: 201757604187811891, guid: 5fe72886874b4e445b06cf777ca4920d, type: 3}
   levelBounds: {fileID: 2572952653776768186}
 --- !u!1 &519420028
 GameObject:
@@ -329,14 +329,13 @@ GameObject:
   m_Component:
   - component: {fileID: 742235890}
   - component: {fileID: 742235892}
-  - component: {fileID: 742235891}
   m_Layer: 0
   m_Name: EnemySystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &742235890
 Transform:
   m_ObjectHideFlags: 0
@@ -353,24 +352,6 @@ Transform:
   m_Father: {fileID: 3951702117947426122}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &742235891
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 742235889}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02542d485d129164a833b5a0cd207267, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  countPool: 7
-  enemyPositions: {fileID: 7166351703523243261}
-  worldTransform: {fileID: 1683128698}
-  container: {fileID: 863502598}
-  prefab: {fileID: 1613027761, guid: 87fe189881a524806800482ac8eaaa83, type: 3}
-  bulletSystem: {fileID: 363245577}
 --- !u!114 &742235892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,8 +364,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32dae85f8264479bac19d85418d92392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyFabrica: {fileID: 742235891}
+  _enemyCount: 7
   character: {fileID: 4414282821800802397}
+  enemyPositions: {fileID: 7166351703523243261}
+  _bulletSystem: {fileID: 363245577}
+  prefabEnemy: {fileID: 1613027761, guid: 87fe189881a524806800482ac8eaaa83, type: 3}
+  poolParent: {fileID: 863502598}
+  worldTransform: {fileID: 1683128698}
 --- !u!1 &863502597
 GameObject:
   m_ObjectHideFlags: 0
@@ -678,7 +664,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1831741368
+--- !u!1 &1748380340
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -686,22 +672,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1831741369}
+  - component: {fileID: 1748380341}
   m_Layer: 0
-  m_Name: Pool
+  m_Name: BulletPool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1831741369
+  m_IsActive: 0
+--- !u!4 &1748380341
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1831741368}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_GameObject: {fileID: 1748380340}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -753,10 +739,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c57ed31af8d94ec3b11df7e2b588d40f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 4414282821800802397}
+  hitPointsComponent: {fileID: 4414282821800802401}
+  weaponComponent: {fileID: 4414282821800802400}
+  teamComponent: {fileID: 4414282821800802399}
+  moveComponent: {fileID: 4414282821800802398}
   gameManager: {fileID: 3951702117947426123}
   inputManager: {fileID: 1134805361}
-  _levelBounds: {fileID: 0}
+  levelBounds: {fileID: 2572952653776768186}
   bulletSystem: {fileID: 363245577}
 --- !u!1 &61006797492197339
 GameObject:
@@ -1408,10 +1397,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 335ed066ce13ddc4997716e0785cb425, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPointsComponent: {fileID: 4414282821800802401}
-  weaponComponent: {fileID: 4414282821800802400}
-  teamComponent: {fileID: 4414282821800802399}
-  moveComponent: {fileID: 4414282821800802398}
 --- !u!1 &4788406047096451828
 GameObject:
   m_ObjectHideFlags: 0
@@ -1444,7 +1429,7 @@ MonoBehaviour:
   - {fileID: 5897317814060027325}
   - {fileID: 7143208560141865592}
   m_params:
-    m_startPositionY: 19
+    m_startPositionY: 38
     m_endPositionY: -38
     m_movingSpeedY: 5
 --- !u!1 &4914023371208914563

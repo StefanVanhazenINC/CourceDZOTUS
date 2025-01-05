@@ -6,33 +6,64 @@ namespace ShootEmUp
 {
     public sealed class EnemyManager : MonoBehaviour
     {
-        [SerializeField]
-        //private EnemyPool enemyPool;
-        private EnemyFabrica enemyFabrica;
-        [SerializeField]
-        private GameObject character;
+        [SerializeField] private int _enemyCount = 7;
+        [SerializeField] private GameObject character;
+        [SerializeField] private EnemyPositions enemyPositions;
+        [SerializeField] private BulletSystem _bulletSystem;
+        [SerializeField] private EnemyFacade prefabEnemy;
+        [SerializeField] private Transform poolParent;
+        [SerializeField] private Transform worldTransform;
+        private EnemyFactory enemyFactory;
+        private EnemyPool enemyPool;
 
+        private void Awake()
+        {
+            InitPoolAndFactory();
+        }
+        private void InitPoolAndFactory()
+        {
+            enemyFactory = new EnemyFactory(prefabEnemy);
+            enemyPool = new EnemyPool(poolParent);
 
-       // private readonly HashSet<EnemyFacad> m_activeEnemies = new();
-
+            for (int i = 0; i < _enemyCount; i++)
+            {
+                EnemyFacade enemy = enemyFactory.CreateEnemy(_bulletSystem,enemyPool.ReturnInPool);
+                enemyPool.AddInPool(enemy);
+                enemy.Disable();
+            }
+        }
         private IEnumerator Start()
         {
             while (true)
             {
                 yield return new WaitForSeconds(1);
-                var enemy = this.enemyFabrica.SpawnEnemy();
-                if (enemy != null)
+
+                if (enemyPool.ActiveEnemies.Count < _enemyCount) 
                 {
-                    enemy.SetTarget(character);
+                    EnemyFacade enemy = GetEnemy();
+                    SetEnemySetting(enemy,this.enemyPositions.RandomSpawnPosition(), this.enemyPositions.RandomAttackPosition());
                 }
-                //if (enemy != null)
-                //{
-                //    if (this.m_activeEnemies.Add(enemy))
-                //    {
-                //        enemy.SetTarget(character);
-                //    }    
-                //}
             }
         }
+
+        private EnemyFacade GetEnemy() 
+        {
+            if (enemyPool.TryGet(out EnemyFacade enemy))
+            {
+                return enemy;
+            }
+            enemy = enemyFactory.CreateEnemy(_bulletSystem, enemyPool.ReturnInPool);
+            enemyPool.AddInPool(enemy);
+            return enemy;
+        }
+        private void SetEnemySetting(EnemyFacade enemy, Transform spawnPosition, Transform attackPosition) 
+        {
+            enemy.SetTarget(character);
+            enemy.gameObject.SetActive(true);
+            enemy.transform.position = spawnPosition.position;
+            enemy.SetDestination(attackPosition.position);
+            enemy.transform.SetParent(worldTransform);
+        }
+
     }
 }

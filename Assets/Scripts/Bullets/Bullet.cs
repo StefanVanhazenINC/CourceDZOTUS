@@ -5,7 +5,6 @@ namespace ShootEmUp
 {
     public sealed class Bullet : MonoBehaviour
     {
-        public event Action<Bullet, Collision2D> OnCollisionEntered;
         public event Action<Bullet> OnDisableBullet;
         [NonSerialized] public bool isPlayer;
         [NonSerialized] public int damage;
@@ -23,9 +22,25 @@ namespace ShootEmUp
         }
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            this.OnCollisionEntered?.Invoke(this, collision);
+            if (!collision.collider.TryGetComponent(out TeamComponent team))
+            {
+                return;
+            }
+
+            if (isPlayer == team.IsPlayer)
+            {
+                return;
+            }
+
+            if (collision.collider.TryGetComponent(out HitPointsComponent hitPoints))
+            {
+                hitPoints.TakeDamage(damage);
+                Disable();
+            }
+
         }
 
+       
         public void SetVelocity(Vector2 velocity)
         {
             this.rigidbody2D.velocity = velocity;
@@ -45,5 +60,7 @@ namespace ShootEmUp
         {
             this.spriteRenderer.color = color;
         }
+
+        
     }
 }

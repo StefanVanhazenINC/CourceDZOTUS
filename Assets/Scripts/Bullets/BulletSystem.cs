@@ -8,23 +8,32 @@ namespace ShootEmUp
         [SerializeField]
         private int initialCount = 50;
         
-        [SerializeField] private Transform container;
-        [SerializeField] private Bullet prefab;
+        [SerializeField] private Transform poolParent;
         [SerializeField] private Transform worldTransform;
+
+        [SerializeField] private Bullet prefab;
         [SerializeField] private LevelBounds levelBounds;
 
-        private BulletFabrica bulletFabrica;
-        private readonly Queue<Bullet> m_bulletPool = new();
-        private readonly HashSet<Bullet> m_activeBullets = new();
+        private BulletPool bulletPool;
+        private BulletFactory bulletFactory;
         private readonly List<Bullet> m_cache = new();
         
         private void Awake()
         {
-        
-            bulletFabrica = new BulletFabrica(container, worldTransform, prefab, OnBulletCollision, initialCount);
+            InitPoolAndFactory();
         }
-        
-        //=========================
+        private void InitPoolAndFactory() 
+        {
+            bulletFactory = new BulletFactory(prefab);
+            bulletPool = new BulletPool(poolParent);
+
+            for (int i = 0; i < initialCount; i++)
+            {
+                Bullet bullet = bulletFactory.CreateBullet(bulletPool.ReturnInPool);
+                bulletPool.AddInPool(bullet);
+                bullet.Disable();
+            }
+        }
         private void FixedUpdate()
         {
             CheckInBounds();
@@ -32,7 +41,7 @@ namespace ShootEmUp
         private void CheckInBounds() 
         {
             this.m_cache.Clear();
-            this.m_cache.AddRange(bulletFabrica.ActiveBullets);
+            this.m_cache.AddRange(bulletPool.ActiveBullets);
 
             for (int i = 0, count = this.m_cache.Count; i < count; i++)
             {
@@ -43,18 +52,36 @@ namespace ShootEmUp
                 }
             }
         }
-        //==============================
+
+
         public void FlyBulletByArgs(BulletData args)
         {
-            Bullet bullet = bulletFabrica.GetBullet(args);
+            Bullet bullet = GetBullet();
+            SetBulletSetting(bullet,args);
         }
-        
-        private void OnBulletCollision(Bullet bullet, Collision2D collision)
+
+        private Bullet GetBullet() 
         {
-            BulletUtils.DealDamage(bullet, collision.gameObject);
-            bullet.Disable();
-            
+            if (bulletPool.TryGet(out Bullet bullet))
+            {
+                return bullet;  
+            }
+            bullet = bulletFactory.CreateBullet(bulletPool.ReturnInPool);
+            bulletPool.AddInPool(bullet);
+            return bullet;
         }
+        private void SetBulletSetting(Bullet bullet, BulletData args)
+        {
+            bullet.transform.SetParent(worldTransform);
+            bullet.gameObject.SetActive(true);
+            bullet.SetPosition(args.position);
+            bullet.SetColor(args.color);
+            bullet.SetPhysicsLayer(args.physicsLayer);
+            bullet.damage = args.damage;
+            bullet.isPlayer = args.isPlayer;
+            bullet.SetVelocity(args.velocity);
+        }
+      
         
     }
 }
