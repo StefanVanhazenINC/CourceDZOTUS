@@ -18,10 +18,6 @@ public class CameraFollower : MonoBehaviour,IGameLateUpdateListener
         _targetCamera.transform.position = _workSpace + _offset;
     }
 
-    //private void LateUpdate()
-    //{
-    //    _workSpace.Set(_defaultPositionX, _character.Position.y, _character.Position.z);
-    //    _targetCamera.transform.position = _workSpace + _offset;
-    //}
+  
 
 }

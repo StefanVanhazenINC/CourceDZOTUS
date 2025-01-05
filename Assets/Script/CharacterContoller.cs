@@ -10,15 +10,7 @@ public class CharacterContoller : MonoBehaviour,IGameStartListener,IGameResumeLi
 
     private float _verticalInput = 0 ;
     private float _horizontal;
-    //private void OnEnable()
-    //{
-    //    _keyboardInput.OnInput += OnMove;
-    //}
-
-    //private void OnDisable()
-    //{
-    //    _keyboardInput.OnInput -= OnMove;
-    //}
+   
 
     private void OnMove(int direction) 
     {

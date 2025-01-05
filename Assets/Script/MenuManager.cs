@@ -13,37 +13,24 @@ public class MenuManager : MonoBehaviour
 
     
 
-    [SerializeField] private float _delayToPlay;
-    private float _timerDelayToPlay;
+    [SerializeField] private int _delayToPlay;
 
-    private bool _isPlaying = true;
     private bool _isPaused = false;
-    private void Start() 
+  
+ 
+    private IEnumerator StartGameWhithCooldown() 
     {
-        _timerDelayToPlay = _delayToPlay;
-    }
-    private void Update()
-    {
-        if (!_isPlaying) 
+        for (int time = _delayToPlay; time >= 0; time--)
         {
-            if (_timerDelayToPlay > 0)
-            {
-                _timerDelayToPlay -= Time.deltaTime;
-                Debug.Log(Mathf.CeilToInt(_timerDelayToPlay));
-            }
-            else 
-            {
-                _isPlaying = true;
-                _gameManager.StartGame();
-            }
+            yield return new WaitForSeconds(1);
+            Debug.Log(time);
         }
-      //
-       // _timerDelayToPlay -= Time.deltaTime;
-       // Debug.Log(Mathf. ;
+        _gameManager.StartGame();
     }
     public void StartGame() 
     {
-        _isPlaying = false;
+
+        StartCoroutine(StartGameWhithCooldown());
         if (_startButton)
         {
             _startButton.gameObject.SetActive(false);
@@ -66,16 +53,6 @@ public class MenuManager : MonoBehaviour
             ResumeGame();
         }
 
-        //if (_isPlaying)
-        //{
-        //    _gameManager.PauseGame();
-        //    _timerDelayToPlay = _delayToPlay;
-
-        //}
-        //else 
-        //{
-        //    _isPlaying = false;
-        //}
 
     }
     public void ResumeGame() 

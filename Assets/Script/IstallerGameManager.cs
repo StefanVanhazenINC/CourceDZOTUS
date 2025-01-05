@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class IstallerGameManager : MonoBehaviour
 {
-    [SerializeField] private MonoBehaviour[] _permaInstanceInGameManager;
+    [SerializeField] private MonoBehaviour[] _InstanceInGameManager;
 
     private void Awake()
     {
@@ -17,15 +17,15 @@ public class IstallerGameManager : MonoBehaviour
         }
 
 
-        for (int i = 0; i < _permaInstanceInGameManager.Length; i++)
+        for (int i = 0; i < _InstanceInGameManager.Length; i++)
         {
-            if (_permaInstanceInGameManager[i] is IGameListener) 
+            if (_InstanceInGameManager[i] is IGameListener) 
             {
-                gameManager.AddListener(_permaInstanceInGameManager[i] as IGameListener);
+                gameManager.AddListener(_InstanceInGameManager[i] as IGameListener);
             }
-            if (_permaInstanceInGameManager[i] is Character) 
+            if (_InstanceInGameManager[i] is Character) 
             {
-               Character character =  _permaInstanceInGameManager[i] as Character;
+               Character character =  _InstanceInGameManager[i] as Character;
                character.OnDeathCharacter += gameManager.FinishGame;
             }
         }

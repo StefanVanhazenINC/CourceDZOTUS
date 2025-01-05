@@ -23,22 +23,7 @@ public class RoadGeneration : MonoBehaviour,IGameUpdateListener,IGameStartListen
     private float _lastSpawnObstacle;
     private int _lastZOffset;
 
-    //private void Start() 
-    //{
-    //    _lastSpawnRoad = _timeToGenerationRoad;
-    //    _lastSpawnObstacle =_timeToGenerationObstacle;
-    //    for (int j = 0; j < _countStartGenerationRoad; j++)
-    //    {
-    //        for (int i = 0; i < _roadPosition.Length; i++)
-    //        {
-    //            //GameObject road = Instantiate(_prefabRoad, _roadPosition[i].position + (Vector3.forward * (_zOffset*j)),Quaternion.identity, _roadPosition[i]);
-    //            //_roadGenerationQueue.Enqueue(road);
-    //            GenerationRoadInPosition(_roadPosition[i].position + (Vector3.forward * (_zOffset * j)), _roadPosition[i]);
-    //        }
-    //    }
-    //    InitObstacleQueue();
-    //    _lastZOffset = _countStartGenerationRoad;
-    //}
+ 
     private void InitObstacleQueue() 
     {
         for (int i = 0; i < _countStartObstacle; i++)
@@ -79,20 +64,7 @@ public class RoadGeneration : MonoBehaviour,IGameUpdateListener,IGameStartListen
         }
         _lastZOffset++;
     }
-    //private void Update()
-    //{
-    //    _lastSpawnRoad -= Time.deltaTime;
-    //    _lastSpawnObstacle -= Time.deltaTime;
-    //    if (_lastSpawnRoad <= 0 )
-    //    {
-    //        GenerationRoadInPosition();
-    //    }
-    //    if (_lastSpawnObstacle <=0) 
-    //    {
-    //        GenerationObstacle();
-
-    //    }
-    //}
+ 
 
     public void OnStartGame()
     {
@@ -102,8 +74,6 @@ public class RoadGeneration : MonoBehaviour,IGameUpdateListener,IGameStartListen
         {
             for (int i = 0; i < _roadPosition.Length; i++)
             {
-                //GameObject road = Instantiate(_prefabRoad, _roadPosition[i].position + (Vector3.forward * (_zOffset*j)),Quaternion.identity, _roadPosition[i]);
-                //_roadGenerationQueue.Enqueue(road);
                 GenerationRoadInPosition(_roadPosition[i].position + (Vector3.forward * (_zOffset * j)), _roadPosition[i]);
             }
         }

@@ -54,11 +54,6 @@ public class Character : MonoBehaviour,IGameUpdateListener
     {
         _character.position = Vector3.MoveTowards(_character.position, _character.position + Vector3.forward, (_speedForward * input) * delta);
     }
-    //public void Update()
-    //{
-    //    JumpToPositionRoad(_verticalMod);
-    //    MoveForward(_herizontalMod);
-    //}
 
     
     public void OnUpdate(float deltaTime)

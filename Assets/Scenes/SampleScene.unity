@@ -554,7 +554,6 @@ GameObject:
   - component: {fileID: 648384233}
   - component: {fileID: 648384234}
   - component: {fileID: 648384235}
-  - component: {fileID: 648384236}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -606,7 +605,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8579fc6dcda88f048bb0c98b4ef41ce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _permaInstanceInGameManager:
+  _InstanceInGameManager:
   - {fileID: 1043111865}
 --- !u!114 &648384235
 MonoBehaviour:
@@ -624,20 +623,6 @@ MonoBehaviour:
   _startButton: {fileID: 1554087355}
   _pauseButton: {fileID: 327064891}
   _delayToPlay: 3
---- !u!114 &648384236
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 648384231}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d3ac825f3ddcb342bac0281ec0ac9eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gameManager: {fileID: 648384233}
-  _character: {fileID: 1043111865}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

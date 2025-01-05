@@ -8,10 +8,6 @@ public class KeyboardInput : MonoBehaviour , IGameUpdateListener
     public Action<int> OnInput;
 
 
-    //private void Update()
-    //{
-    //    HandleKeyboardInput();
-    //}
     private void HandleKeyboardInput() 
     {
         if (Input.GetKey(KeyCode.LeftArrow))
