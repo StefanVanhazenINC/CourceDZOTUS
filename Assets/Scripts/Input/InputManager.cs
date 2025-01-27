@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
 namespace ShootEmUp
 {
-    public sealed class InputManager : MonoBehaviour
+    public sealed class InputManager : ITickable
     {
         public float HorizontalDirection { get; private set; }
 
@@ -15,9 +16,11 @@ namespace ShootEmUp
 
         private Vector2 directionInput = new Vector2();
 
-        private void Update()
+      
+
+        public void Tick()
         {
-            if (Input.GetKeyDown(FireKey)) 
+            if (Input.GetKeyDown(FireKey))
             {
                 OnFire?.Invoke();
             }
@@ -27,8 +30,6 @@ namespace ShootEmUp
             directionInput.Set(HorizontalDirection, 0);
             OnMove?.Invoke(directionInput);
 
-
         }
-       
     }
 }

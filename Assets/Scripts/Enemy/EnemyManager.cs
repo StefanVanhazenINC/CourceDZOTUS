@@ -1,69 +1,57 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyManager : MonoBehaviour
+    public sealed class EnemyManager 
     {
-        [SerializeField] private int _enemyCount = 7;
-        [SerializeField] private GameObject character;
-        [SerializeField] private EnemyPositions enemyPositions;
-        [SerializeField] private BulletSystem _bulletSystem;
-        [SerializeField] private EnemyFacade prefabEnemy;
-        [SerializeField] private Transform poolParent;
-        [SerializeField] private Transform worldTransform;
+        private int enemyCount = 7;
+        private MonoBehaviour context;
+        [Inject]
+        private EnemyPositions enemyPositions;
+        [Inject]
+        private PlayerFacade character;
+        [Inject]
         private EnemyFactory enemyFactory;
-        private EnemyPool enemyPool;
 
-        private void Awake()
-        {
-            InitPoolAndFactory();
-        }
-        private void InitPoolAndFactory()
-        {
-            enemyFactory = new EnemyFactory(prefabEnemy);
-            enemyPool = new EnemyPool(poolParent);
+        private int _countActiveEnemy = 0;
 
-            for (int i = 0; i < _enemyCount; i++)
-            {
-                EnemyFacade enemy = enemyFactory.CreateEnemy(_bulletSystem,enemyPool.ReturnInPool);
-                enemyPool.AddInPool(enemy);
-                enemy.Disable();
-            }
+        public EnemyManager(int enemyCount, MonoBehaviour context)
+        {
+            this.enemyCount = enemyCount;
+            
+            this.context = context;
+            this.context.StartCoroutine(Start());
         }
+
         private IEnumerator Start()
         {
             while (true)
             {
                 yield return new WaitForSeconds(1);
 
-                if (enemyPool.ActiveEnemies.Count < _enemyCount) 
+                if (_countActiveEnemy < enemyCount)
                 {
-                    EnemyFacade enemy = GetEnemy();
-                    SetEnemySetting(enemy,this.enemyPositions.RandomSpawnPosition(), this.enemyPositions.RandomAttackPosition());
+                    EnemyFacade enemy = enemyFactory.Create() ;
+                    _countActiveEnemy++;
+                    SetEnemySetting(enemy, this.enemyPositions.RandomSpawnPosition(), this.enemyPositions.RandomAttackPosition());
                 }
             }
         }
-
-        private EnemyFacade GetEnemy() 
+        private void DisableEnemy(EnemyFacade enemy) 
         {
-            if (enemyPool.TryGet(out EnemyFacade enemy))
-            {
-                return enemy;
-            }
-            enemy = enemyFactory.CreateEnemy(_bulletSystem, enemyPool.ReturnInPool);
-            enemyPool.AddInPool(enemy);
-            return enemy;
+            _countActiveEnemy--;
+            enemy.disableAction -= DisableEnemy;
         }
-        private void SetEnemySetting(EnemyFacade enemy, Transform spawnPosition, Transform attackPosition) 
+        private void SetEnemySetting(EnemyFacade enemy, Transform spawnPosition, Transform attackPosition)
         {
             enemy.SetTarget(character);
             enemy.gameObject.SetActive(true);
             enemy.transform.position = spawnPosition.position;
             enemy.SetDestination(attackPosition.position);
-            enemy.transform.SetParent(worldTransform);
+            enemy.disableAction += DisableEnemy;
         }
-
     }
 }

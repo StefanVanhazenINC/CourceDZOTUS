@@ -1,54 +1,36 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace ShootEmUp
 {
-    public sealed class BulletSystem : MonoBehaviour
+    public sealed class BulletSystem : IFixedTickable
     {
-        [SerializeField]
-        private int initialCount = 50;
-        
-        [SerializeField] private Transform poolParent;
-        [SerializeField] private Transform worldTransform;
-
-        [SerializeField] private Bullet prefab;
-        [SerializeField] private LevelBounds levelBounds;
-
-        private BulletPool bulletPool;
+        [Inject]
+        private LevelBounds levelBounds;
+        [Inject]
         private BulletFactory bulletFactory;
-        private readonly List<Bullet> m_cache = new();
-        
-        private void Awake()
-        {
-            InitPoolAndFactory();
-        }
-        private void InitPoolAndFactory() 
-        {
-            bulletFactory = new BulletFactory(prefab);
-            bulletPool = new BulletPool(poolParent);
 
-            for (int i = 0; i < initialCount; i++)
-            {
-                Bullet bullet = bulletFactory.CreateBullet(bulletPool.ReturnInPool);
-                bulletPool.AddInPool(bullet);
-                bullet.Disable();
-            }
-        }
-        private void FixedUpdate()
+        private readonly List<Bullet> m_cache = new();
+
+        public void FixedTick()
         {
             CheckInBounds();
         }
+       
         private void CheckInBounds() 
         {
-            this.m_cache.Clear();
-            this.m_cache.AddRange(bulletPool.ActiveBullets);
-
-            for (int i = 0, count = this.m_cache.Count; i < count; i++)
+            
+            int cacheCount = m_cache.Count;
+            for (int i = 0, count = cacheCount; i < count; i++)
             {
-                var bullet = this.m_cache[i];
-                if (!this.levelBounds.InBounds(bullet.transform.position))
+                if (this.m_cache.Count >= cacheCount) 
                 {
-                    bullet.Disable();
+                    var bullet = this.m_cache[i];
+                    if (!this.levelBounds.InBounds(bullet.transform.position))
+                    {
+                        bullet.Dispose();
+                    }
                 }
             }
         }
@@ -56,23 +38,22 @@ namespace ShootEmUp
 
         public void FlyBulletByArgs(BulletData args)
         {
-            Bullet bullet = GetBullet();
+            Bullet bullet = bulletFactory.Create() ;
+            AddCacheBullet(bullet);
             SetBulletSetting(bullet,args);
         }
-
-        private Bullet GetBullet() 
+        public void AddCacheBullet(Bullet bullet) 
         {
-            if (bulletPool.TryGet(out Bullet bullet))
-            {
-                return bullet;  
-            }
-            bullet = bulletFactory.CreateBullet(bulletPool.ReturnInPool);
-            bulletPool.AddInPool(bullet);
-            return bullet;
+            this.m_cache.Add(bullet);
         }
+        public void RemoveCacheBullet(Bullet bullet)
+        {
+            bullet.OnDisableBullet -= RemoveCacheBullet;
+            this.m_cache.Remove(bullet);
+        }
+      
         private void SetBulletSetting(Bullet bullet, BulletData args)
         {
-            bullet.transform.SetParent(worldTransform);
             bullet.gameObject.SetActive(true);
             bullet.SetPosition(args.position);
             bullet.SetColor(args.color);
@@ -80,8 +61,8 @@ namespace ShootEmUp
             bullet.damage = args.damage;
             bullet.isPlayer = args.isPlayer;
             bullet.SetVelocity(args.velocity);
+            bullet.OnDisableBullet += RemoveCacheBullet;
         }
-      
-        
+
     }
 }

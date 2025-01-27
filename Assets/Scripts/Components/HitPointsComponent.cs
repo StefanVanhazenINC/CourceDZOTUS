@@ -3,12 +3,19 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class HitPointsComponent : MonoBehaviour
+    public sealed class HitPointsComponent 
     {
+        public GameObject character;
         public event Action<GameObject> hpEmpty;
         
-        [SerializeField] private int hitPoints;
-        
+        private int hitPoints;
+
+        public HitPointsComponent(GameObject character, int hitPoints)
+        {
+            this.character = character;
+            this.hitPoints = hitPoints;
+        }
+
         public bool IsHitPointsExists() 
         {
             return this.hitPoints > 0;
@@ -19,7 +26,7 @@ namespace ShootEmUp
             this.hitPoints -= damage;
             if (this.hitPoints <= 0)
             {
-                this.hpEmpty?.Invoke(this.gameObject);
+                this.hpEmpty?.Invoke(character);
             }
         }
     }

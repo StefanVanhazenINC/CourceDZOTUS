@@ -1,28 +1,44 @@
 using UnityEngine;
+using Zenject;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyAttackAgent : MonoBehaviour
+    public sealed class EnemyAttackAgent : IFixedTickable
     {
+        [Inject]
         [SerializeField] private WeaponComponent weaponComponent;
+        [Inject]
         [SerializeField] private TeamComponent teamComponent;
+        [Inject]
         [SerializeField] private EnemyMoveAgent moveAgent;
         [SerializeField] private float countdown;
 
-        private GameObject target;
+        private PlayerFacade target;
         private HitPointsComponent hitPointsTarget;
         private float currentTime;
 
+        public EnemyAttackAgent( float countdown)
+        {
+            this.countdown = countdown;
+        }
+
         public WeaponComponent WeaponComponent { get => weaponComponent; }
 
-        public void SetTarget(GameObject target)
+        public void SetTarget(PlayerFacade target)
         {
             this.target = target;
-            hitPointsTarget = this.target.GetComponent<HitPointsComponent>();
+            hitPointsTarget = this.target.HitPointsComponent;
             this.currentTime = this.countdown;
         }
   
-        private void FixedUpdate()
+        
+
+        private void Fire()
+        {
+            weaponComponent.OnFire(teamComponent.IsPlayer);
+        }
+
+        public void FixedTick()
         {
             if (!this.moveAgent.IsReached)
             {
@@ -40,11 +56,6 @@ namespace ShootEmUp
                 this.Fire();
                 this.currentTime += this.countdown;
             }
-        }
-
-        private void Fire()
-        {
-            weaponComponent.OnFire(teamComponent.IsPlayer);
         }
     }
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class LevelBounds : MonoBehaviour
+    public sealed class LevelBounds 
     {
         [SerializeField]
         private Transform leftBorder;
@@ -15,7 +15,15 @@ namespace ShootEmUp
 
         [SerializeField]
         private Transform topBorder;
-        
+
+        public LevelBounds(Transform leftBorder, Transform rightBorder, Transform downBorder, Transform topBorder)
+        {
+            this.leftBorder = leftBorder;
+            this.rightBorder = rightBorder;
+            this.downBorder = downBorder;
+            this.topBorder = topBorder;
+        }
+
         public bool InBounds(Vector3 position)
         {
             var positionX = position.x;

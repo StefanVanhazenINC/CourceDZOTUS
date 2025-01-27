@@ -1,9 +1,10 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace ShootEmUp
 {
-    public sealed class Bullet : MonoBehaviour
+    public sealed class Bullet : MonoBehaviour, IPoolable<IMemoryPool>, IDisposable
     {
         public event Action<Bullet> OnDisableBullet;
         [NonSerialized] public bool isPlayer;
@@ -15,29 +16,23 @@ namespace ShootEmUp
         [SerializeField]
         private SpriteRenderer spriteRenderer;
 
+        private IMemoryPool pool;
     
         public void Disable() 
         {
             OnDisableBullet?.Invoke(this);
         }
+
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (!collision.collider.TryGetComponent(out TeamComponent team))
+            if (collision.collider.TryGetComponent(out ICharacterFacade character))
             {
-                return;
+                if (!character.SameTeam(isPlayer))
+                {
+                    character.TakeDamage(damage);
+                    Dispose();
+                }
             }
-
-            if (isPlayer == team.IsPlayer)
-            {
-                return;
-            }
-
-            if (collision.collider.TryGetComponent(out HitPointsComponent hitPoints))
-            {
-                hitPoints.TakeDamage(damage);
-                Disable();
-            }
-
         }
 
        
@@ -61,6 +56,22 @@ namespace ShootEmUp
             this.spriteRenderer.color = color;
         }
 
-        
+        public void Dispose()
+        {
+            Disable();
+
+            if (pool != null) 
+            {
+                pool.Despawn(this);
+            }
+        }
+        public void OnDespawned()
+        {
+            pool = null;
+        }
+        public void OnSpawned(IMemoryPool pool)
+        {
+            this.pool = pool;
+        }
     }
 }

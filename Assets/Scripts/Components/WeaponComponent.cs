@@ -1,12 +1,22 @@
 using UnityEngine;
+using Zenject;
 
 namespace ShootEmUp
 {
-    public sealed class WeaponComponent : MonoBehaviour
+    public sealed class WeaponComponent 
     {
-        [SerializeField] private BulletConfig bulletConfig;
-        [SerializeField] private Transform firePoint;
+        private BulletConfig bulletConfig;
+        private Transform firePoint;
+
+        [Inject]
         private BulletSystem bulletSystem;
+
+        public WeaponComponent(BulletConfig bulletConfig, Transform firePoint)
+        {
+            this.bulletConfig = bulletConfig;
+            this.firePoint = firePoint;
+        }
+
         public Vector2 Position
         {
             get { return this.firePoint.position; }
@@ -16,10 +26,7 @@ namespace ShootEmUp
         {
             get { return this.firePoint.rotation; }
         }
-        public void SetBulletSystem(BulletSystem bulletSystem) 
-        {
-            this.bulletSystem = bulletSystem;   
-        }
+    
         public void OnFire(bool isPlayer) 
         {
             bulletSystem.FlyBulletByArgs(new BulletData

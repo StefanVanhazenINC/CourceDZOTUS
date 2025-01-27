@@ -1,41 +1,45 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace ShootEmUp
 {
-    public sealed class CharacterController : MonoBehaviour
+    public sealed class CharacterController : IDisposable
     {
-        [Header("CharacterModuls")]
-        [SerializeField] private HitPointsComponent hitPointsComponent;
-        [SerializeField] private WeaponComponent weaponComponent;
-        [SerializeField] private TeamComponent teamComponent;
-        [SerializeField] private MoveComponent moveComponent;
+       
+     
+        [Inject]
+        private GameManager gameManager;
+        [Inject]
+        private LevelBounds levelBounds;
 
-        [SerializeField] private GameManager gameManager;
-        [SerializeField] private InputManager inputManager;
+        private InputManager inputManager;
 
-        [SerializeField] private LevelBounds levelBounds;
-
-
-        [Header("BulletSystem")]
-        [SerializeField] private BulletSystem bulletSystem;
-
-        public bool GetIsPlayer { get => teamComponent.IsPlayer; }
-
-
-        private void OnEnable()
+        private TeamComponent teamComponent;
+        private MoveComponent moveComponent;
+        private HitPointsComponent hitPointsComponent;
+        private WeaponComponent weaponComponent;
+        public CharacterController(HitPointsComponent hitPoint,
+                                                    WeaponComponent weaponComponent, 
+                                                                    MoveComponent moveComponent,
+                                                                                    TeamComponent teamComponent,
+                                                                                            InputManager inputManager)
         {
-            SetBulletSystem(bulletSystem);
+            this.hitPointsComponent = hitPoint;
+            this.weaponComponent = weaponComponent;
+            this.moveComponent = moveComponent;
+            this.teamComponent = teamComponent;
+            this.inputManager = inputManager;
+
             AddListenerDeathCharacter(OnCharacterDeath);
+
             inputManager.OnMove += OnMove;
             inputManager.OnFire += OnFire;
         }
-        private void OnDisable()
-        {
-            RemoveListnerDeathCharacter(OnCharacterDeath);
-            inputManager.OnMove -= OnMove;
-            inputManager.OnFire -= OnFire;
-        }
+
+        public bool GetIsPlayer { get => teamComponent.IsPlayer; }
+
+     
         public void AddListenerDeathCharacter(Action<GameObject> action)
         {
             hitPointsComponent.hpEmpty += action;
@@ -44,10 +48,6 @@ namespace ShootEmUp
         {
             hitPointsComponent.hpEmpty -= action;
         }
-        public void SetBulletSystem(BulletSystem bulletSystem)
-        {
-            weaponComponent.SetBulletSystem(bulletSystem);
-        }
         private void OnCharacterDeath(GameObject _)
         {
             this.gameManager.FinishGame();
@@ -55,7 +55,7 @@ namespace ShootEmUp
     
         private void OnMove(Vector2 direction) 
         {
-            if (levelBounds.InBounds((Vector2)moveComponent.transform.position + direction)) 
+            if (levelBounds.InBounds((Vector2)moveComponent.Body.position + direction)) 
             {
                 moveComponent.MoveByRigidbodyVelocity(direction);
             }
@@ -67,10 +67,11 @@ namespace ShootEmUp
 
         }
 
-      
-       
-     
-       
-
+        public void Dispose()
+        {
+            RemoveListnerDeathCharacter(OnCharacterDeath);
+            inputManager.OnMove -= OnMove;
+            inputManager.OnFire -= OnFire;
+        }
     }
 }
