@@ -489,6 +489,8 @@ GameObject:
   m_Component:
   - component: {fileID: 554003254}
   - component: {fileID: 554003255}
+  - component: {fileID: 554003256}
+  - component: {fileID: 554003257}
   m_Layer: 5
   m_Name: PopUpLevelUp
   m_TagString: Untagged
@@ -531,16 +533,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d61d0ffe953d28040a79ab84e48b199e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _namePlayer: {fileID: 2100531113}
   _level: {fileID: 1064158343}
-  _description: {fileID: 1246117379}
   _xpBar: {fileID: 1985035937}
   _xpValue: {fileID: 1779240468}
-  _characterPortrait: {fileID: 1451376181}
-  _statViewParent: {fileID: 640279656}
   _levelUp: {fileID: 1920838154}
-  _close: {fileID: 920526866}
   _timeAnimationXpBar: 0.1
+--- !u!114 &554003256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554003253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ffc76fa60c2dcd419fac16fa99a058f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _statViewParent: {fileID: 640279656}
+  _close: {fileID: 920526866}
+--- !u!114 &554003257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554003253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3b4e2c4c0130004bb9925641ae1aebf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _namePlayer: {fileID: 2100531113}
+  _description: {fileID: 1246117379}
+  _characterPortrait: {fileID: 1451376181}
 --- !u!1 &558051033
 GameObject:
   m_ObjectHideFlags: 0
@@ -1768,9 +1794,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6be72f62fc884e4a8fba0e443b97620, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _view: {fileID: 554003255}
+  _levelUpView: {fileID: 554003255}
+  _popUpView: {fileID: 554003256}
   _statViewPrefab: {fileID: 1092498993588701663, guid: a056aa0e5b1cfed44a24b49b8c850be0,
     type: 3}
+  _userInfoView: {fileID: 554003257}
   _characterConfig: {fileID: 11400000, guid: 0e874eba6957bb74dbd23e5b4ba86d88, type: 2}
 --- !u!1 &1779240466
 GameObject:

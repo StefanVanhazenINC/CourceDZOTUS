@@ -6,18 +6,20 @@ using UnityEngine;
 using CharacterInfo = Lessons.Architecture.PM.CharacterInfo;
 public class PresenterInstaller : MonoBehaviour
 {
-    [SerializeField] private LevelUpPopView _view;
+    [SerializeField] private LevelUpPopView _levelUpView;
+    [SerializeField] private PopUpView _popUpView;
     [SerializeField] private StatView _statViewPrefab;
+    [SerializeField] private UserInfoView _userInfoView;
     [SerializeField] private CharacterConfig _characterConfig;
 
-    private LevelUpPopPresenter _presenter;
+    private PopUpPresenter _presenter;
  
     [Button]
     public void SetConfig() 
     {
         if (_presenter == null)
         {
-            LevelUpPopPresenter presenter = new LevelUpPopPresenter(_statViewPrefab, _view, _characterConfig.CharacterInfo, _characterConfig.Level, _characterConfig.PlayerInfo);
+            PopUpPresenter presenter = new PopUpPresenter(_statViewPrefab, _popUpView, _userInfoView,_levelUpView, _characterConfig.CharacterInfo, _characterConfig.Level, _characterConfig.PlayerInfo);
             _presenter = presenter;
         }
         else 
