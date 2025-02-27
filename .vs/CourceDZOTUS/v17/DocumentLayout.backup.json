@@ -1,0 +1,134 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Users\\alexs\\Desktop\\UnityProject\\GitHub\\CourceDZOTUS\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B2DCEAF9-0279-B598-9DA2-A7023B312A58}|Assembly-CSharp.csproj|d:\\users\\alexs\\desktop\\unityproject\\github\\courcedzotus\\assets\\homeworks\\presentationmodel\\scripts\\ui\\presenter\\characterinfopresenter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2DCEAF9-0279-B598-9DA2-A7023B312A58}|Assembly-CSharp.csproj|solutionrelative:assets\\homeworks\\presentationmodel\\scripts\\ui\\presenter\\characterinfopresenter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2DCEAF9-0279-B598-9DA2-A7023B312A58}|Assembly-CSharp.csproj|d:\\users\\alexs\\desktop\\unityproject\\github\\courcedzotus\\assets\\homeworks\\presentationmodel\\scripts\\ui\\presenter\\popuppresenter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2DCEAF9-0279-B598-9DA2-A7023B312A58}|Assembly-CSharp.csproj|solutionrelative:assets\\homeworks\\presentationmodel\\scripts\\ui\\presenter\\popuppresenter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2DCEAF9-0279-B598-9DA2-A7023B312A58}|Assembly-CSharp.csproj|d:\\users\\alexs\\desktop\\unityproject\\github\\courcedzotus\\assets\\homeworks\\presentationmodel\\scripts\\ui\\view\\characterinfoview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2DCEAF9-0279-B598-9DA2-A7023B312A58}|Assembly-CSharp.csproj|solutionrelative:assets\\homeworks\\presentationmodel\\scripts\\ui\\view\\characterinfoview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2DCEAF9-0279-B598-9DA2-A7023B312A58}|Assembly-CSharp.csproj|d:\\users\\alexs\\desktop\\unityproject\\github\\courcedzotus\\assets\\homeworks\\presentationmodel\\scripts\\ui\\presenterinstaller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2DCEAF9-0279-B598-9DA2-A7023B312A58}|Assembly-CSharp.csproj|solutionrelative:assets\\homeworks\\presentationmodel\\scripts\\ui\\presenterinstaller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2DCEAF9-0279-B598-9DA2-A7023B312A58}|Assembly-CSharp.csproj|d:\\users\\alexs\\desktop\\unityproject\\github\\courcedzotus\\assets\\homeworks\\presentationmodel\\scripts\\ui\\view\\popupview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2DCEAF9-0279-B598-9DA2-A7023B312A58}|Assembly-CSharp.csproj|solutionrelative:assets\\homeworks\\presentationmodel\\scripts\\ui\\view\\popupview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2DCEAF9-0279-B598-9DA2-A7023B312A58}|Assembly-CSharp.csproj|d:\\users\\alexs\\desktop\\unityproject\\github\\courcedzotus\\assets\\homeworks\\presentationmodel\\scripts\\ui\\presenter\\leveluppoppresenter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2DCEAF9-0279-B598-9DA2-A7023B312A58}|Assembly-CSharp.csproj|solutionrelative:assets\\homeworks\\presentationmodel\\scripts\\ui\\presenter\\leveluppoppresenter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 283,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PresenterInstaller.cs",
+              "DocumentMoniker": "D:\\Users\\alexs\\Desktop\\UnityProject\\GitHub\\CourceDZOTUS\\Assets\\Homeworks\\PresentationModel\\Scripts\\UI\\PresenterInstaller.cs",
+              "RelativeDocumentMoniker": "Assets\\Homeworks\\PresentationModel\\Scripts\\UI\\PresenterInstaller.cs",
+              "ToolTip": "D:\\Users\\alexs\\Desktop\\UnityProject\\GitHub\\CourceDZOTUS\\Assets\\Homeworks\\PresentationModel\\Scripts\\UI\\PresenterInstaller.cs",
+              "RelativeToolTip": "Assets\\Homeworks\\PresentationModel\\Scripts\\UI\\PresenterInstaller.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAwwBQAAABWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-27T08:01:31.727Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "LevelUpPopPresenter.cs",
+              "DocumentMoniker": "D:\\Users\\alexs\\Desktop\\UnityProject\\GitHub\\CourceDZOTUS\\Assets\\Homeworks\\PresentationModel\\Scripts\\UI\\Presenter\\LevelUpPopPresenter.cs",
+              "RelativeDocumentMoniker": "Assets\\Homeworks\\PresentationModel\\Scripts\\UI\\Presenter\\LevelUpPopPresenter.cs",
+              "ToolTip": "D:\\Users\\alexs\\Desktop\\UnityProject\\GitHub\\CourceDZOTUS\\Assets\\Homeworks\\PresentationModel\\Scripts\\UI\\Presenter\\LevelUpPopPresenter.cs",
+              "RelativeToolTip": "Assets\\Homeworks\\PresentationModel\\Scripts\\UI\\Presenter\\LevelUpPopPresenter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-27T07:57:17.273Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 395,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CharacterInfoPresenter.cs",
+              "DocumentMoniker": "D:\\Users\\alexs\\Desktop\\UnityProject\\GitHub\\CourceDZOTUS\\Assets\\Homeworks\\PresentationModel\\Scripts\\UI\\Presenter\\CharacterInfoPresenter.cs",
+              "RelativeDocumentMoniker": "Assets\\Homeworks\\PresentationModel\\Scripts\\UI\\Presenter\\CharacterInfoPresenter.cs",
+              "ToolTip": "D:\\Users\\alexs\\Desktop\\UnityProject\\GitHub\\CourceDZOTUS\\Assets\\Homeworks\\PresentationModel\\Scripts\\UI\\Presenter\\CharacterInfoPresenter.cs",
+              "RelativeToolTip": "Assets\\Homeworks\\PresentationModel\\Scripts\\UI\\Presenter\\CharacterInfoPresenter.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAowA0AAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-27T08:07:53.708Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CharacterInfoView.cs",
+              "DocumentMoniker": "D:\\Users\\alexs\\Desktop\\UnityProject\\GitHub\\CourceDZOTUS\\Assets\\Homeworks\\PresentationModel\\Scripts\\UI\\View\\CharacterInfoView.cs",
+              "RelativeDocumentMoniker": "Assets\\Homeworks\\PresentationModel\\Scripts\\UI\\View\\CharacterInfoView.cs",
+              "ToolTip": "D:\\Users\\alexs\\Desktop\\UnityProject\\GitHub\\CourceDZOTUS\\Assets\\Homeworks\\PresentationModel\\Scripts\\UI\\View\\CharacterInfoView.cs",
+              "RelativeToolTip": "Assets\\Homeworks\\PresentationModel\\Scripts\\UI\\View\\CharacterInfoView.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-27T08:05:48.666Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PopUpPresenter.cs",
+              "DocumentMoniker": "D:\\Users\\alexs\\Desktop\\UnityProject\\GitHub\\CourceDZOTUS\\Assets\\Homeworks\\PresentationModel\\Scripts\\UI\\Presenter\\PopUpPresenter.cs",
+              "RelativeDocumentMoniker": "Assets\\Homeworks\\PresentationModel\\Scripts\\UI\\Presenter\\PopUpPresenter.cs",
+              "ToolTip": "D:\\Users\\alexs\\Desktop\\UnityProject\\GitHub\\CourceDZOTUS\\Assets\\Homeworks\\PresentationModel\\Scripts\\UI\\Presenter\\PopUpPresenter.cs",
+              "RelativeToolTip": "Assets\\Homeworks\\PresentationModel\\Scripts\\UI\\Presenter\\PopUpPresenter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-27T07:57:19.162Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 7,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PopUpView.cs",
+              "DocumentMoniker": "D:\\Users\\alexs\\Desktop\\UnityProject\\GitHub\\CourceDZOTUS\\Assets\\Homeworks\\PresentationModel\\Scripts\\UI\\View\\PopUpView.cs",
+              "RelativeDocumentMoniker": "Assets\\Homeworks\\PresentationModel\\Scripts\\UI\\View\\PopUpView.cs",
+              "ToolTip": "D:\\Users\\alexs\\Desktop\\UnityProject\\GitHub\\CourceDZOTUS\\Assets\\Homeworks\\PresentationModel\\Scripts\\UI\\View\\PopUpView.cs",
+              "RelativeToolTip": "Assets\\Homeworks\\PresentationModel\\Scripts\\UI\\View\\PopUpView.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-27T07:56:49.491Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

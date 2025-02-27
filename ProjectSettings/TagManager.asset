@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Wall
+  - Plant
+  - PlantField
+  - GameContext
   layers:
   - Default
   - TransparentFX
@@ -13,11 +17,11 @@ TagManager:
   - UI
   - 
   - 
+  - Null
   - 
-  - 
-  - 
-  - 
-  - 
+  - PlayerCollider
+  - NPCCollider
+  - Interactible
   - 
   - 
   - 
@@ -40,4 +44,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Game
+    uniqueID: 3068553397
+    locked: 0
+  - name: WorldCanvas
+    uniqueID: 1447468599
+    locked: 0
+  - name: UI
+    uniqueID: 476679877
+    locked: 0
+  - name: Tutorial
+    uniqueID: 2835718279
     locked: 0
